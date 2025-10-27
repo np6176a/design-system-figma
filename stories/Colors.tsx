@@ -1,5 +1,3 @@
-import './colors.css';
-
 export interface ColorSwatchProps {
   /** Color name */
   name: string;
@@ -11,15 +9,15 @@ export interface ColorSwatchProps {
 
 const ColorSwatch = ({ name, value, isDark = false }: ColorSwatchProps) => {
   return (
-    <div className="storybook-color-swatch">
+    <div className="flex flex-col gap-2">
       <div 
-        className="storybook-color-square" 
+        className="w-full aspect-square rounded-lg border border-gray-300" 
         style={{ backgroundColor: value }}
       />
-      <p className={`storybook-color-value ${isDark ? 'storybook-color-value--dark' : ''}`}>
+      <p className={`font-[var(--font-sans)] text-sm font-medium ${isDark ? 'text-gray-800' : 'text-[var(--color-text-primary)]'}`}>
         {value}
       </p>
-      <p className={`storybook-color-name ${isDark ? 'storybook-color-name--dark' : ''}`}>
+      <p className={`font-[var(--font-sans)] text-sm font-normal ${isDark ? 'text-gray-600' : 'text-[var(--color-text-secondary)]'}`}>
         {name}
       </p>
     </div>
@@ -28,12 +26,12 @@ const ColorSwatch = ({ name, value, isDark = false }: ColorSwatchProps) => {
 
 export const ColorPalette = () => {
   return (
-    <div className="storybook-color-palette">
-      <h2 className="storybook-color-palette-title">Color Palette</h2>
+    <div className="p-6 max-w-7xl">
+      <h2 className="text-[32px] font-[var(--font-weight-semibold)] mb-8 text-[var(--color-text-primary)]">Color Palette</h2>
       
-      <div className="storybook-color-section">
-        <h3 className="storybook-color-section-title">Primary Colors</h3>
-        <div className="storybook-color-grid">
+      <div className="mb-10">
+        <h3 className="text-2xl font-[var(--font-weight-medium)] mb-4 text-[var(--color-text-primary)]">Primary Colors</h3>
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-6">
           <ColorSwatch name="Primary" value="#6f7f6a" isDark={false} />
           <ColorSwatch name="Secondary" value="#8e6e53" isDark={false} />
           <ColorSwatch name="Tertiary" value="#9aa895" isDark={false} />
@@ -42,9 +40,9 @@ export const ColorPalette = () => {
         </div>
       </div>
       
-      <div className="storybook-color-section">
-        <h3 className="storybook-color-section-title">Neutral Colors</h3>
-        <div className="storybook-color-grid">
+      <div className="mb-10">
+        <h3 className="text-2xl font-[var(--font-weight-medium)] mb-4 text-[var(--color-text-primary)]">Neutral Colors</h3>
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-6">
           <ColorSwatch name="Neutral Light" value="#f7f3ea" isDark={false} />
           <ColorSwatch name="Neutral Lighter" value="#eae2d3" isDark={false} />
           <ColorSwatch name="Neutral Medium" value="#dce8ee" isDark={false} />
