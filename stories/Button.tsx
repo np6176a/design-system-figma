@@ -25,7 +25,7 @@ export const Button = ({
     primary: 'bg-[var(--color-primary)] text-white hover:translate-y-[-1px] hover:shadow-lg',
     secondary: 'bg-[var(--color-secondary)] text-white hover:translate-y-[-1px] hover:shadow-lg',
     tertiary: 'bg-[var(--color-tertiary)] text-white hover:translate-y-[-1px] hover:shadow-lg',
-    outline: 'bg-transparent border-2 text-[var(--color-primary)] border-[var(--color-primary)] hover:translate-y-[-1px]'
+    outline: 'bg-transparent border-2 border-solid text-[var(--color-primary)] border-[var(--color-primary)] hover:translate-y-[-1px]'
   };
   
   const sizeClasses = {

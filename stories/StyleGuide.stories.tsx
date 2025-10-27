@@ -3,7 +3,9 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { Banner } from './Banner';
 import { Button } from './Button';
 import { ColorPalette } from './Colors';
+import { FilterButton } from './FilterButton';
 import { Input } from './Input';
+import { Pill } from './Pill';
 import { Textarea } from './Textarea';
 import { Typography } from './Typography';
 
@@ -97,6 +99,46 @@ export const CompleteStyleGuide: Story = {
       </section>
 
       <section style={{ marginBottom: '60px' }}>
+        <Typography variant="h2" style={{ marginBottom: '24px' }}>Filter Buttons</Typography>
+        <div style={{ display: 'flex', flexDirection: 'row', gap: '12px', flexWrap: 'wrap' }}>
+          <FilterButton 
+            label="Hotel" 
+            icon="http://localhost:3845/assets/c0d6c6894eafb7d5a23891fe21f39d54ac1e71cd.svg"
+            active={true} 
+          />
+          <FilterButton 
+            label="Hotel" 
+            icon="http://localhost:3845/assets/6af5a0e66adda4f7a9b835bde50ce38e6afd83ec.svg"
+            active={false} 
+          />
+          <FilterButton 
+            label="Flights" 
+            icon="http://localhost:3845/assets/33c61c2853b3efc0df6d6735c1831996b30d3ec2.svg"
+            active={true} 
+          />
+          <FilterButton 
+            label="Flights" 
+            icon="http://localhost:3845/assets/ade02742948ff71d19a2af7a03ba13d06b194e84.svg"
+            active={false} 
+          />
+          <FilterButton label="Cars" active={false} />
+          <FilterButton label="Packages" active={false} />
+          <FilterButton label="Cruises" active={false} />
+        </div>
+      </section>
+
+      <section style={{ marginBottom: '60px' }}>
+        <Typography variant="h2" style={{ marginBottom: '24px' }}>Pill Component</Typography>
+        <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+          <Pill icon="hotel">Hotel</Pill>
+          <Pill icon="flights">Flights</Pill>
+          <Pill icon="cars">Cars</Pill>
+          <Pill icon="packages">Packages</Pill>
+          <Pill icon="cruises">Cruises</Pill>
+        </div>
+      </section>
+
+      <section style={{ marginBottom: '60px' }}>
         <Typography variant="h2" style={{ marginBottom: '24px' }}>Form Fields</Typography>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '500px' }}>
           <Input label="Email" type="email" placeholder="you@example.com" />
@@ -146,7 +188,7 @@ export const CompleteStyleGuide: Story = {
         }}>
           <Typography variant="h3">Card Title</Typography>
           <Typography variant="body" color="secondary">
-            This is a card component with a shadow effect, demonstrating the design system's capabilities.
+            This is a card component with a shadow effect, demonstrating the design system&apos;s capabilities.
           </Typography>
           <Button variant="primary">Learn More</Button>
         </div>

@@ -7,6 +7,8 @@ export interface TypographyProps {
   className?: string;
   /** Optional color */
   color?: 'primary' | 'secondary';
+  /** Additional props like style, onClick, etc. */
+  [key: string]: any;
 }
 
 /** Typography component for consistent text styling */
