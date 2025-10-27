@@ -17,7 +17,17 @@ export const Typography = ({
   color = 'primary',
   ...props
 }: TypographyProps) => {
-  const Component = variant;
+  const elementMap = {
+    h1: 'h1',
+    h2: 'h2',
+    h3: 'h3',
+    h4: 'h4',
+    h5: 'h5',
+    h6: 'h6',
+    body: 'p'
+  } as const;
+  
+  const Component = elementMap[variant] as 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
   
   const variantClasses = {
     h1: 'text-[var(--font-size-h1)] font-[var(--font-weight-semibold)] leading-[var(--line-height-h1)]',

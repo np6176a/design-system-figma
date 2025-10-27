@@ -56,12 +56,6 @@ export const Heading6: Story = {
   },
 };
 
-export const Body: Story = {
-  args: {
-    variant: 'body',
-    children: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut dui nibh, tincidunt quis hendrerit sed, dictum ac enim. Ut luctus, orci faucibus blandit luctus, lacus dui imperdiet neque, nec consectetur lacus mauris ut purus. Mauris quis libero lacinia, cursus risus sed, commodo diam.',
-  },
-};
 
 export const SecondaryColor: Story = {
   args: {
@@ -71,7 +65,14 @@ export const SecondaryColor: Story = {
   },
 };
 
-export const TypographyScale: Story = {
+export const Body: Story = {
+  args: {
+    variant: 'body',
+    children: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut dui nibh, tincidunt quis hendrerit sed, dictum ac enim. Ut luctus, orci faucibus blandit luctus, lacus dui imperdiet neque, nec consectetur lacus mauris ut purus.',
+  },
+};
+
+export const TypographyScale: Partial<Story> = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '32px', maxWidth: '800px' }}>
       <Typography variant="h1">H1 Title</Typography>
