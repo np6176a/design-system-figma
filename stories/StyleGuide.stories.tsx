@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
+import { Banner } from './Banner';
 import { Button } from './Button';
 import { ColorPalette } from './Colors';
 import { Input } from './Input';
@@ -21,7 +22,7 @@ export const CompleteStyleGuide: Story = {
   render: () => (
     <div style={{ padding: '40px', maxWidth: '1200px', margin: '0 auto' }}>
       <div style={{ marginBottom: '60px' }}>
-        <Typography variant="h1">Fjell</Typography>
+        <Typography variant="h1" style={{ marginBottom: '16px' }}>Fjell</Typography>
         <Typography variant="body" color="secondary">
           Complete style guide and component library
         </Typography>
@@ -116,6 +117,21 @@ export const CompleteStyleGuide: Story = {
             error={true}
             errorMessage="Message is required"
           />
+        </div>
+      </section>
+
+      <section style={{ marginBottom: '60px' }}>
+        <Typography variant="h2" style={{ marginBottom: '24px' }}>Banner Component</Typography>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          <Banner backgroundColor="#8e6e53" textColor="#f7f3ea">
+            Fall Deals: Get 25% off Flights. Use code AUTMN
+          </Banner>
+          <Banner backgroundColor="#6f7f6a" textColor="#f7f3ea">
+            Spring Sale: Save up to 40% on Hotels Worldwide
+          </Banner>
+          <Banner backgroundColor="#2e4a3b" textColor="#f7f3ea" variant="compact">
+            Limited Time Offer: Free Cancellation
+          </Banner>
         </div>
       </section>
 
