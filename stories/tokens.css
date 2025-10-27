@@ -1,0 +1,57 @@
+/* Design Tokens from Figma Style Guide */
+
+/* Import Outfit Font */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap');
+
+/* Colors */
+:root {
+  --color-primary: #6f7f6a;
+  --color-secondary: #8e6e53;
+  --color-tertiary: #9aa895;
+  --color-quaternary: #b86f3d;
+  
+  --color-neutral-light: #f7f3ea;
+  --color-neutral-lighter: #eae2d3;
+  --color-neutral-medium: #dce8ee;
+  --color-neutral-dark: #7a848c;
+  --color-neutral-darker: #2c2a28;
+  --color-neutral-darkest: #2b2f31;
+  --color-accent: #2e4a3b;
+  
+  /* Semantic colors */
+  --color-text-primary: #2c2a28;
+  --color-text-secondary: #7a848c;
+  --color-background: #ffffff;
+}
+
+/* Typography - Outfit Font */
+:root {
+  --font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  
+  /* Font weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  
+  /* Heading sizes */
+  --font-size-h1: 40px;
+  --font-size-h2: 32px;
+  --font-size-h3: 24px;
+  --font-size-h4: 20px;
+  --font-size-h5: 18px;
+  --font-size-h6: 18px;
+  --font-size-body: 16px;
+  
+  /* Line heights */
+  --line-height-h1: 1.2;
+  --line-height-h2: 1.25;
+  --line-height-h3: 1.33;
+  --line-height-h4: 1.4;
+  --line-height-h5: 1.44;
+  --line-height-h6: 1.44;
+  --line-height-body: 1.5;
+  
+  /* Tracking */
+  --letter-spacing-h6: 0.9px;
+}
+

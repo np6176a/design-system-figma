@@ -1,39 +1,39 @@
 import './button.css';
 
 export interface ButtonProps {
-  /** Is this the principal call to action on the page? */
-  primary?: boolean;
-  /** What background color to use */
-  backgroundColor?: string;
-  /** How large should the button be? */
+  /** Button variant */
+  variant?: 'primary' | 'secondary' | 'tertiary' | 'outline';
+  /** Button size */
   size?: 'small' | 'medium' | 'large';
   /** Button contents */
-  label: string;
+  children: React.ReactNode;
   /** Optional click handler */
   onClick?: () => void;
+  /** Whether button is disabled */
+  disabled?: boolean;
 }
 
 /** Primary UI component for user interaction */
 export const Button = ({
-  primary = false,
+  variant = 'primary',
   size = 'medium',
-  backgroundColor,
-  label,
+  children,
+  disabled = false,
   ...props
 }: ButtonProps) => {
-  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
   return (
     <button
       type="button"
-      className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
+      className={[
+        'storybook-button',
+        `storybook-button--${variant}`,
+        `storybook-button--${size}`,
+        disabled && 'storybook-button--disabled'
+      ].filter(Boolean).join(' ')}
+      disabled={disabled}
       {...props}
     >
-      {label}
-      <style jsx>{`
-        button {
-          background-color: ${backgroundColor};
-        }
-      `}</style>
+      {children}
     </button>
   );
 };
