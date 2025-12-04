@@ -1,0 +1,272 @@
+# Component Creation Rules
+
+This project follows a strict component organization pattern based on atomic design principles. All new components MUST follow these rules.
+
+## Directory Structure
+
+Components are organized into three categories:
+
+1. **Foundation** (`stories/Foundation/`) - Design tokens and base elements
+   - Typography, Colors, Spacing, etc.
+   - Example: `stories/Foundation/Typography/Typography.tsx`
+
+2. **Components** (`stories/Components/`) - Standard UI components
+   - Buttons, Inputs, Cards, Banners, etc.
+   - Example: `stories/Components/Button/Button.tsx`
+
+3. **Molecules** (`stories/Molecules/`) - Complex composite components
+   - Navigation, Headers, Forms, etc.
+   - Example: `stories/Molecules/MainNav/MainNav.tsx`
+
+### File Organization
+
+Each component MUST have its own directory with two files:
+```
+stories/{Category}/{ComponentName}/
+  ├── {ComponentName}.tsx          # Component implementation
+  └── {ComponentName}.stories.tsx  # Storybook stories
+```
+
+## Component File Structure
+
+### 1. Component File (`ComponentName.tsx`)
+
+```typescript
+// 1. Imports (external dependencies first, then local)
+import React from 'react';
+import Image from 'next/image'; // Only if using images
+import { Icon, getMaterialIcon } from '../../icons'; // If using icons
+import asset from '../../assets/asset.png'; // Relative path from component directory
+
+// 2. Props Interface (ALWAYS named {ComponentName}Props)
+export interface ComponentNameProps {
+  /** Description of prop - always include JSDoc comments */
+  propName?: type;
+  /** Optional className for styling overrides */
+  className?: string;
+  /** Additional props spread */
+  [key: string]: any; // Only if component needs to accept arbitrary props
+}
+
+// 3. Component Export (ALWAYS named export)
+/** Brief description of component - always include JSDoc */
+export const ComponentName = ({
+  propName = defaultValue, // Always provide defaults for optional props
+  className = '',
+  ...props
+}: ComponentNameProps) => {
+  // Component implementation
+  return (
+    <div className={`base-classes ${className}`} {...props}>
+      {/* Component JSX */}
+    </div>
+  );
+};
+```
+
+### Required Patterns:
+
+- ✅ ALWAYS export interface as `{ComponentName}Props`
+- ✅ ALWAYS include JSDoc comments for all props
+- ✅ ALWAYS include `className?: string` prop
+- ✅ ALWAYS spread `...props` on root element
+- ✅ ALWAYS provide default values for optional props
+- ✅ ALWAYS use named exports (not default exports)
+- ✅ Use CSS variables from design tokens: `var(--color-primary)`, `var(--font-sans)`, etc.
+- ✅ Font sizes MUST use rem units (base 16px): `text-[1rem]`, `text-[1.125rem]`, etc.
+- ✅ Use Tailwind CSS classes with design system variables
+- ✅ Use Next.js `Image` component for images (not `<img>`)
+- ✅ Import assets using relative paths from component directory
+
+### 2. Stories File (`ComponentName.stories.tsx`)
+
+```typescript
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import { fn } from 'storybook/test'; // Only if component has event handlers
+
+import { ComponentName } from './ComponentName';
+
+const meta = {
+  title: '{Category}/{ComponentName}', // e.g., 'Components/Button', 'Molecules/MainNav'
+  component: ComponentName,
+  parameters: {
+    layout: 'centered', // or 'padded', 'fullscreen' based on component
+  },
+  tags: ['autodocs'],
+  args: { 
+    onClick: fn(), // Include for components with event handlers
+  },
+} satisfies Meta<typeof ComponentName>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    // Default props
+  },
+};
+
+export const VariantName: Story = {
+  args: {
+    // Variant props
+  },
+};
+
+// Additional stories...
+```
+
+### Stories Requirements:
+
+- ✅ ALWAYS import from `'./ComponentName'` (relative path)
+- ✅ ALWAYS use `satisfies Meta<typeof ComponentName>`
+- ✅ Title format: `{Category}/{ComponentName}`
+- ✅ Include `tags: ['autodocs']`
+- ✅ Create multiple stories showing different variants/states
+- ✅ Use `fn()` from `'storybook/test'` for event handlers
+- ✅ Include at least: Default, common variants, edge cases
+
+## Design System Standards
+
+### Font Sizes
+- **MUST use rem units** with base 16px
+- Examples: `text-[1rem]` (16px), `text-[1.125rem]` (18px), `text-[1.25rem]` (20px)
+- **NEVER use px** values directly in font-size classes
+
+### Colors
+- Use CSS variables: `text-[var(--color-text-primary)]`
+- Available colors defined in `app/globals.css`
+- Primary colors: `--color-primary`, `--color-secondary`, `--color-tertiary`
+- Text colors: `--color-text-primary`, `--color-text-secondary`
+- Neutral colors: `--color-neutral-light`, `--color-neutral-medium`, etc.
+
+### Typography
+- Font family: `font-[var(--font-sans)]` (Outfit font)
+- Font weights: Use variables: `var(--font-weight-regular)`, `var(--font-weight-medium)`, `var(--font-weight-semibold)`
+- Letter spacing: Use rem or px as appropriate (e.g., `tracking-[0.9px]`)
+
+### Spacing
+- Use Tailwind spacing utilities: `gap-5`, `px-32`, `py-3`
+- Maintain consistent spacing scale
+
+## Import Path Patterns
+
+### Assets from `stories/assets/`
+```typescript
+// From Components or Molecules directory (2 levels deep)
+import logo from '../../assets/logo.png';
+
+// From Foundation directory (same level)
+import asset from '../assets/asset.png';
+```
+
+### Shared Utilities from `stories/`
+```typescript
+// Icons utility
+import { Icon, getMaterialIcon } from '../../icons';
+
+// Other components
+import { OtherComponent } from '../OtherComponent/OtherComponent';
+```
+
+### Images
+```typescript
+import Image from 'next/image';
+import logo from '../../assets/logo.png';
+
+// In JSX
+<Image
+  src={logo}
+  alt="Description"
+  width={120}
+  height={32}
+  className="h-8 w-auto object-contain"
+  priority // For above-the-fold images
+/>
+```
+
+## TypeScript Requirements
+
+- ✅ Use proper TypeScript types for all props
+- ✅ Use `React.ReactNode` for children
+- ✅ Use union types for variants: `'primary' | 'secondary'`
+- ✅ Use `satisfies` for Storybook meta (not `as`)
+- ✅ Export interfaces for reusability
+- ✅ Use optional chaining for optional props: `onClick?.()`
+
+## Common Patterns
+
+### Conditional Classes
+```typescript
+className={`
+  base-classes
+  ${condition ? 'conditional-classes' : 'alternative-classes'}
+  ${className}
+`}
+```
+
+### Event Handlers
+```typescript
+onClick={(e) => {
+  e.preventDefault();
+  onClick?.();
+}}
+```
+
+### Default Props
+```typescript
+export const Component = ({
+  variant = 'primary',
+  size = 'medium',
+  disabled = false,
+  className = '',
+  ...props
+}: ComponentProps) => {
+  // Implementation
+};
+```
+
+## Component Categories Guide
+
+### Foundation
+- Design tokens and base elements
+- Typography, Colors, Spacing utilities
+- Base components that don't represent UI elements
+
+### Components
+- Standard, reusable UI components
+- Buttons, Inputs, Cards, Banners, Pills, etc.
+- Single-purpose, composable elements
+
+### Molecules
+- Complex components made of multiple atoms/components
+- Navigation bars, Form groups, Card sections
+- Components with multiple interactive elements
+
+## Checklist for New Components
+
+Before creating a component, verify:
+
+- [ ] Correct directory category (Foundation/Components/Molecules)
+- [ ] Directory created: `stories/{Category}/{ComponentName}/`
+- [ ] Component file: `{ComponentName}.tsx`
+- [ ] Stories file: `{ComponentName}.stories.tsx`
+- [ ] Interface named: `{ComponentName}Props`
+- [ ] All props have JSDoc comments
+- [ ] Includes `className?: string`
+- [ ] Spreads `...props`
+- [ ] Uses rem units for font sizes
+- [ ] Uses CSS variables for colors
+- [ ] Storybook title format: `{Category}/{ComponentName}`
+- [ ] Multiple stories created
+- [ ] Images use Next.js `Image` component
+- [ ] Import paths are relative and correct
+
+## Examples
+
+See existing components for reference:
+- Simple component: `stories/Components/Button/`
+- Form component: `stories/Components/Input/`
+- Complex component: `stories/Molecules/MainNav/`
+- Foundation: `stories/Foundation/Typography/`
+
