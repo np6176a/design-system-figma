@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
-import { Banner } from './Banner';
-import { Button } from './Button';
-import { ColorPalette } from './Colors';
-import { FilterButton } from './FilterButton';
-import { Input } from './Input';
-import { Pill } from './Pill';
-import { Textarea } from './Textarea';
-import { Typography } from './Typography';
+import { Banner } from './Components/Banner/Banner';
+import { Button } from './Components/Button/Button';
+import { ColorPalette } from './Foundation/Colors/Colors';
+import { FilterButton } from './Components/FilterButton/FilterButton';
+import { Input } from './Components/Input/Input';
+import { Pill } from './Components/Pill/Pill';
+import { Textarea } from './Components/Textarea/Textarea';
+import { Typography } from './Foundation/Typography/Typography';
 
 const meta = {
   title: 'Documentation/Style Guide',

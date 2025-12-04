@@ -1,4 +1,4 @@
-import { Icon, getMaterialIcon } from './icons';
+import { Icon, getMaterialIcon } from '../../icons';
 
 export interface PillProps {
   /** Pill content */
